@@ -1,9 +1,9 @@
 import './style.css'
 import Phaser from 'phaser'
 
-const sizes={
+const sizes = {
   width: window.innerWidth,
-  height:window.innerHeight,
+  height: window.innerHeight,
 }
 
 const config = {
