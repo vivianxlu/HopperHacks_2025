@@ -36,8 +36,15 @@ function create() {
 
   this.input.setDraggable(background);
   window.addEventListener('resize', () => {
-    const widthScaleFactor = window.innerWidth / background.width;
-    background.setScale(widthScaleFactor, widthScaleFactor);
+    if (window.innerWidth > 700) {
+      const widthScaleFactor = window.innerWidth / background.width;
+      background.setScale(widthScaleFactor, widthScaleFactor);
+      background.setPosition(window.innerWidth / 2, window.innerHeight / 2);
+    } else {
+      const heightScaleFactor = window.innerHeight / background.height;
+      background.setScale(heightScaleFactor, heightScaleFactor);
+      background.setPosition(window.innerWidth / 2, window.innerHeight / 2);
+    }
   })
 
 }
