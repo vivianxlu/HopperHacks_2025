@@ -12,9 +12,14 @@ const config = {
   height: sizes.height,
   canvas: gameCanvas,
   scene: {
-    preload: preload,
+    preload,
     create,
     update
+  },
+  scale: {
+    width: sizes.width,
+    height: sizes.height,
+    mode: Phaser.Scale.RESIZE
   }
 }
 
@@ -25,7 +30,16 @@ function preload() {
 }
 
 function create() {
-  this.add.image(window.innerWidth / 2, window.innerHeight / 2, 'beach');
+  const background = this.add.image(window.innerWidth / 2, window.innerHeight / 2, 'beach');
+
+  background.setInteractive();
+
+  this.input.setDraggable(background);
+  window.addEventListener('resize', () => {
+    const widthScaleFactor = window.innerWidth / background.width;
+    background.setScale(widthScaleFactor, widthScaleFactor);
+  })
+
 }
 
 function update() {
