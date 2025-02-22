@@ -26,7 +26,7 @@ const config = {
 const game = new Phaser.Game(config);
 
 function preload() {
-  this.load.image('beach', 'assets/images/beach_background_1.jpg');
+  this.load.image('beach', 'assets/background/beach_background_1.jpg');
 }
 
 function create() {
