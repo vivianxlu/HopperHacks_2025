@@ -1,6 +1,6 @@
 import Phaser from 'phaser';
-import './style.css';
 import Character from './character.js';
+import './style.css';
 
 const sizes = {
   width: window.innerWidth,
@@ -33,33 +33,20 @@ function preload() {
 
 function create() {
   const background = this.add.image(window.innerWidth / 2, window.innerHeight / 2, 'beach');
-  const pirate = this.add.image(window.innerWidth / 2, window.innerHeight / 2, 'pirate');
-  const pirate_img = this.add.image(window.innerWidth / 2, window.innerHeight / 2, 'pirate');
-  
-  const pirate1 = new Character("luffy", 100, 0, 0, 0, {characterImage: pirate});
-  const pirate2 = new Character("luffy", 100, 0, 0, 0, {characterImage: pirate});
-
-  pirate1.assets.characterImage = pirate; 
-  pirate2.assets.characterImage = pirate_img; 
-
-  pirate.setScale(5, 5);
-
-  render(this, pirate1);
-  render(this, pirate2);
-  
-
   background.setInteractive();
-  pirate.setInteractive();
-  pirate_img.setInteractive();
 
-  this.input.setDraggable(pirate);
-  this.input.setDraggable(pirate_img);
-  this.input.on('drag', (pointer, gameObject, dragX, dragY) => {
-    updateAssets(this, pirate1);
-    updateAssets(this, pirate2);
-    gameObject.x = dragX;
-    gameObject.y = dragY;
-  });
+  create_pirate(this);
+  create_pirate(this);
+  create_pirate(this);
+  create_pirate(this);
+  create_pirate(this);
+  create_pirate(this);
+  create_pirate(this);
+  create_pirate(this);
+  create_pirate(this);
+  create_pirate(this);
+  create_pirate(this);
+  create_pirate(this);
 
   window.addEventListener('resize', () => {
     if (window.innerWidth > 700) {
@@ -74,16 +61,26 @@ function create() {
   })
 }
 
-function updateAssets(scene, pirate){
-  pirate.assets.barBackground.setPosition(pirate.assets.characterImage.x, pirate.assets.characterImage.y - 100);
-  pirate.assets.healthBar.setPosition(pirate.assets.characterImage.x, pirate.assets.characterImage.y - 100);
+function create_pirate(scene) {
+  const pirate = new Character("luffy", 100, 0, 0, 0, {
+    characterImage: scene.add.image(window.innerWidth / 2, window.innerHeight / 2, 'pirate'),
+  });
+  pirate.assets.barBackground = scene.add.rectangle(pirate.assets.characterImage.x, pirate.assets.characterImage.y - 100, pirate.health, 20, 0x000000);
+  pirate.assets.healthBar = scene.add.rectangle(pirate.assets.characterImage.x, pirate.assets.characterImage.y - 100, pirate.health, 20, 0x00ff00);
+  pirate.assets.characterImage.setScale(5, 5);
+  pirate.assets.characterImage.setInteractive();
+  scene.input.setDraggable(pirate.assets.characterImage);
+  scene.input.on('drag', (pointer, gameObject, dragX, dragY) => {
+    updateAssets(pirate);
+    gameObject.x = dragX;
+    gameObject.y = dragY;
+  });
+  return pirate;
 }
 
-function render(scene, pirate){
-  const barBackground = scene.add.rectangle(pirate.assets.characterImage.x, pirate.assets.characterImage.y - 100, pirate.health, 20, 0x000000);
-  const healthBar = scene.add.rectangle(pirate.assets.characterImage.x, pirate.assets.characterImage.y - 100, pirate.health, 20, 0x00ff00);
-  pirate.assets.barBackground = barBackground;
-  pirate.assets.healthBar = healthBar;
+function updateAssets(pirate) {
+  pirate.assets.barBackground.setPosition(pirate.assets.characterImage.x, pirate.assets.characterImage.y - 100);
+  pirate.assets.healthBar.setPosition(pirate.assets.characterImage.x, pirate.assets.characterImage.y - 100);
 }
 
 function update() {
