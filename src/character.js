@@ -1,4 +1,4 @@
-class Character {
+export default class Character {
     /**
      *
      * @param {String} name
@@ -9,12 +9,13 @@ class Character {
      * @param {Move} moves
      * @param {String} weapon
      */
-    constructor(name, health, attack, defense, speed, moves=[], weapon) {
+    constructor(name, health, attack, defense, speed, assets={}, moves=[], weapon) {
         this.name = name; // Name of the character
         this.health = health; // Health points
         this.attack = attack; // Attack power
         this.defense = defense; // Defense value
         this.speed = speed; // Speed, can affect turn order in battle or actions
+        this.assets = assets;
     }
 
     takeDamage(damage) {
