@@ -25,7 +25,7 @@ function preload() {
 }
 
 function create() {
-  this.add.image(400, 300, 'beach');
+  this.add.image(window.innerWidth / 2, window.innerHeight / 2, 'beach');
 }
 
 function update() {
